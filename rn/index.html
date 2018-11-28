@@ -94,12 +94,18 @@ function showElapsed(m) {
 }
 
 function elapsedTime() {
+    // fix the date within the Date.UTC from php script when call is made
+    // internally, use UTC for consistencies (as far as I know new
+    // Date() returns date in UTC. the toString() called on Date
+    // object returns date in browser's time zone.
     var start = new Date(Date.UTC(2018,10,28,19,00));
     document.getElementById('lastcall').innerHTML = start.toString();
     var now = new Date();
     var elapsed = now - start;
-    document.getElementById('elapsed').innerHTML = showElapsed(elapsed);
-    setTimeout(function() {elapsedTime()}, 500);
+    document.getElementById('elapsed').innerHTML =
+	showElapsed(elapsed);
+    // ask browser to update divs in 0.9 of a second
+    setTimeout(function() {elapsedTime()}, 900);
 }
 
 </script>
@@ -113,7 +119,7 @@ function elapsedTime() {
     <h1>Online Call</h1>
 
     <p>Call Made At:</p><div id="lastcall"></div>
-    <p>Call active for</p><div id="elapsed"</div>
+    <p>Call active for</p><div id="elapsed"></div>
     
           <p class="value">
         <span style="display: block;">Petrol</span>

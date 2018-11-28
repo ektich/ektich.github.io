@@ -69,6 +69,7 @@
       color: #ccc;
     }
   </style>
+
   <script>
     function checkTime(i) {
 	if (i < 10) {
@@ -77,31 +78,42 @@
 	return i;
     }
 
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    // add a zero in front of numbers<10
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
-    t = setTimeout(function () {
-        startTime()
-    }, 500);
+function showElapsed(m) {
+  var s = Math.floor(m/1000);
+  var m = 0;
+  var h = 0;
+  if (s > 59) {
+  	m = Math.floor(s/60);
+    s = s - 60*m;
+  }
+  if ( m > 59) {
+    h = Math.floor(m/60);
+    m = m - 60*h;
+  }
+  return checkTime(h) + ":" + checkTime(m) + ":" + checkTime(s)
 }
+
+function elapsedTime() {
+    var start = new Date(Date.UTC(2018,10,28,19,00));
+    document.getElementById('lastcall').innerHTML = start.toString();
+    var now = new Date();
+    var elapsed = now - start;
+    document.getElementById('elapsed').innerHTML = showElapsed(elapsed);
+    setTimeout(function() {elapsedTime()}, 500);
+}
+
 </script>
   
 </head>
-<body onload="startTime()">
+<body onload="elapsedTime()">
 
   <div class="wrapper">
     <img src="Railnation.png" width="150" />
 
     <h1>Online Call</h1>
 
-<div id="time"></div>    
-    
+    <p>Call Made At:</p><div id="lastcall"></div>
+    <p>Call active for</p><div id="elapsed"</div>
     
           <p class="value">
         <span style="display: block;">Petrol</span>

@@ -21,6 +21,16 @@ The slice should be started as a root user with `systemctl start chromium.slice`
 To start Chromium within the slice run `systemd-run --scope --slice chromium.slice chromium`. Again, run this without using `sudo`, PolicyKit will authenticate current user to perform any privileged tasks needed.
 
 To check the status of the slice run `systemctl status chromium.slice`. It will show all processes running within the slice, and will show total memory usage within the slice:
+```
+● chromium.slice
+   Loaded: loaded (/etc/systemd/system/chromium.slice; static; vendor preset: disabled)
+   Active: active since Wed 2019-10-16 16:09:22 IST; 1h 2min ago
+    Tasks: 137
+   Memory: 623.9M (high: 2.0G max: 6.0G)
+   CGroup: /chromium.slice
+           └─run-u22782.scope
+```
+
 
 ## Running as user with --user
 It is possible to create slice within user's session by placing the file into ~/.config/systemd/user directory, but it looks like memory accounting/limiting does not work for user-based slices. It feels like (but requires more testing), that user-based slices get linked with the `user.slice` cgroup, instead of a dedicated cgroup being created for it.

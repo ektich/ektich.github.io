@@ -9,3 +9,5 @@ layout: default
 [Publishing network services with systemd](./systemd_dnssd.md)
 
 [SpotifyD on AlarmPI](./spotifyd_alarmpi.md)
+
+[Adafruit LCD on RPi](./adafruit_lcd.md)

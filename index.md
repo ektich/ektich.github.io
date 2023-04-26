@@ -11,3 +11,5 @@ layout: default
 [SpotifyD on AlarmPI](./spotifyd_alarmpi.md)
 
 [Adafruit LCD on RPi](./adafruit_lcd.md)
+
+[Testing Ansible Roles with Molecule](./molecule.md)
